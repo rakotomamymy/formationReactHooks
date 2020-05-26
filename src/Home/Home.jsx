@@ -1,7 +1,8 @@
 import React from 'react';
 import Cars from '../Cars/Cars';
 
-export default function Home() {
+export default function Home(props) {
+
     return (
         <div>
             <h3>

@@ -3,6 +3,7 @@ import './App.css';
 import Login from './Login/Login';
 import Home from './Home/Home';
 import {LogOutWithHistory} from './LogOut/LogOut';
+import Register from './Register/Register';
 import { BrowserRouter as Router, Route , Switch} from 'react-router-dom';
 
 function App() {
@@ -38,11 +39,14 @@ function App() {
       <Router>
         {isAuthenticated && <LogOutWithHistory logginOut={userLoggedOut}/>}
         <Switch>
-          <Route path="/Home/">
-            <Home/>
+          <Route path="/Login">
+            <Login onLogginSuccess={userLogged}/>
+          </Route>
+          <Route path="/Register">
+            <Register/>
           </Route>
           <Route path="/">
-            <Login onLogginSuccess={userLogged}/>
+            <Home/>
           </Route>
         </Switch>        
       </Router>

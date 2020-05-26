@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import Login from './Login';
-import Home from './Home';
+import Login from './Login/Login';
+import Home from './Home/Home';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="container">
       <Router>
-      <h3 className="mb-3">Connected user : {login}</h3>
+      <span className="mb-3">Connected user : {login}</span>
         <Route exact path="/">
           <Login onLogginSuccess={userLogged}/>
         </Route>

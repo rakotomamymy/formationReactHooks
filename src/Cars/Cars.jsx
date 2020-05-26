@@ -1,5 +1,5 @@
 import React from 'react';
-import Car from './Car';
+import Car from '../Car/Car';
 
 export default function Cars() {
     
@@ -7,7 +7,7 @@ export default function Cars() {
 
     return (
         <div>
-            <h3>List of all my cars</h3>
+            <span>List of all my cars :</span>
             <div className="m-2">
             {
                 cars.map(car => <Car key={car.id} brand={car.brand} model={car.model}/>)

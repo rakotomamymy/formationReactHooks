@@ -13,7 +13,7 @@ export default function Register(props) {
         email: '',
         password: ''
     }
-    const [value, setValue] = useState(defaultValue);
+    const [formValue, setFormValue] = useState(defaultValue);
 
     const defaultError = {
         name: [],
@@ -23,12 +23,12 @@ export default function Register(props) {
         email: [],
         password: []
     }
-    const [error, setError] = useState(defaultError);
+    const [formError, setFormError] = useState(defaultError);
 
     const onInputChanged = (e) => {
         const inputValue = e.target.value;
         const inputName = e.target.name;
-        setValue({...value, [inputName]: inputValue})
+        setFormValue({...formValue, [inputName]: inputValue})
 
         const validators = validation[inputName];
         handleValidation(inputName, inputValue, validators);
@@ -38,14 +38,14 @@ export default function Register(props) {
         let isValid = false;
         validators.forEach(validator => {
             const result = validator(value, name);
-            const errorList = error[name];
+            const errorList = formError[name];
             if (!result.isValid) {                
                 if (!errorList.includes(result.errorMessage))
-                    setError(prevState => ({...prevState, [name]: [...errorList, result.errorMessage]}))
+                    setFormError(prevState => ({...prevState, [name]: [...errorList, result.errorMessage]}))
                 isValid = false;
             } else {                
                 if (errorList.includes(result.errorMessage))
-                    setError(prevState => ({...error, [name]: errorList.filter(e => e !== result.errorMessage)}))
+                    setFormError(prevState => ({...formError, [name]: errorList.filter(e => e !== result.errorMessage)}))
                 isValid = true;
             }
         });
@@ -54,8 +54,8 @@ export default function Register(props) {
 
     const validateAllInput = () => {
         let isFormValid = true;
-        Object.keys(value).forEach(key => {
-            if (!handleValidation(key, value[key], validation[key]))
+        Object.keys(formValue).forEach(key => {
+            if (!handleValidation(key, formValue[key], validation[key]))
                 isFormValid = false;            
         });
         return isFormValid;
@@ -106,11 +106,11 @@ export default function Register(props) {
 
         if (validateAllInput()) {
             //Call callback function of App.js
-            props.onUserRegistering(value.email);
+            props.onUserRegistering(formValue.email);
 
             //Add localStorage
             localStorage.setItem('isAuthenticated', true);
-            localStorage.setItem('login', value.email);
+            localStorage.setItem('login', formValue.email);
 
             //Add redirection
             history.push('/');
@@ -122,29 +122,29 @@ export default function Register(props) {
             <h3>Register a new user</h3>
             <div className="m-2">
                 <div>Summary of your info :</div>
-                <div>Name : {value.name}</div>
-                <div>Firstname : {value.firstname}</div>
-                <div>Email : {value.email}</div>
-                <div>Sex : {value.sex}</div>
-                <div>DateOfBirth : {value.dateOfBirth}</div>
-                <div>Password : {value.password}</div>
+                <div>Name : {formValue.name}</div>
+                <div>Firstname : {formValue.firstname}</div>
+                <div>Email : {formValue.email}</div>
+                <div>Sex : {formValue.sex}</div>
+                <div>DateOfBirth : {formValue.dateOfBirth}</div>
+                <div>Password : {formValue.password}</div>
             </div>
 
             <form onSubmit={submitForm}>
                 <div className="m-2">
                     <div>
                         <input type="text" placeholder="Enter your name" name="name" onChange={onInputChanged}/>
-                        <span>{error.name !== '' && error.name}</span>
+                        <span>{formError.name !== '' && formError.name}</span>
                     </div>
                     
                     <div>
                         <input type="text" placeholder="Enter your firstname" name="firstname" onChange={onInputChanged}/>
-                        <span>{error.firstname !== '' && error.firstname}</span>
+                        <span>{formError.firstname !== '' && formError.firstname}</span>
                     </div>
                     
                     <div>
                         <input type="text" placeholder="Enter your email" name="email" onChange={onInputChanged}/>
-                        <span>{error.email.length > 0 && error.email[error.email.length - 1] !== '' && error.email[error.email.length - 1]}</span>
+                        <span>{formError.email.length > 0 && formError.email[formError.email.length - 1] !== '' && formError.email[formError.email.length - 1]}</span>
                     </div>                    
                     
                     <div>
@@ -153,17 +153,17 @@ export default function Register(props) {
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
-                        <span>{error.sex !== '' && error.sex}</span>
+                        <span>{formError.sex !== '' && formError.sex}</span>
                     </div>
                     
                     <div>
                         <input type="date" placeholder="Enter your date of birth" name="dateOfBirth" onChange={onInputChanged}/>
-                        <span>{error.dateOfBirth.length > 0 && error.dateOfBirth[error.dateOfBirth.length - 1] !== '' && error.dateOfBirth[error.dateOfBirth.length - 1]}</span>
+                        <span>{formError.dateOfBirth.length > 0 && formError.dateOfBirth[formError.dateOfBirth.length - 1] !== '' && formError.dateOfBirth[formError.dateOfBirth.length - 1]}</span>
                     </div>
                     
                     <div>
                         <input type="password" placeholder="Enter your password" name="password" onChange={onInputChanged}/>
-                        <span>{error.password.length > 0 && error.password[error.password.length - 1] !== '' && error.password[error.password.length - 1]}</span>
+                        <span>{formError.password.length > 0 && formError.password[formError.password.length - 1] !== '' && formError.password[formError.password.length - 1]}</span>
                     </div>
                         
                     <div className="m-2">

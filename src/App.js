@@ -26,6 +26,11 @@ function App() {
     setLogin(e);
   };
 
+  const userRegistered = e => {
+    setIsAuthenticated(true);
+    setLogin(e);
+  };
+
   const userLoggedOut = () => {
     setIsAuthenticated(false);
     setLogin('Anonymous');
@@ -43,7 +48,7 @@ function App() {
             <Login onLogginSuccess={userLogged}/>
           </Route>
           <Route path="/Register">
-            <Register/>
+            <Register onUserRegistering={userRegistered}/>
           </Route>
           <Route path="/">
             <Home/>

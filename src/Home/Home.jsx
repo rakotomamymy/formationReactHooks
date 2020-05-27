@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Cars from '../Cars/Cars';
 
 export default function Home(props) {
+
+    useEffect(() => {
+        
+    }, []);
 
     return (
         <div>

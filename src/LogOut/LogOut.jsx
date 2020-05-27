@@ -12,7 +12,7 @@ export default function LogOut(props) {
 
         props.logginOut();
 
-        history.push('/');
+        history.push('/Login/');
     };
 
     return(

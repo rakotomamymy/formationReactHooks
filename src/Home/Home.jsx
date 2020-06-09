@@ -10,7 +10,7 @@ export default function Home(props) {
     return (
         <div>
             <h3>
-                Home page
+                Hello Azure !!!
             </h3>            
             <Cars/> 
         </div>       

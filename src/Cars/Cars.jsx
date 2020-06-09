@@ -7,7 +7,7 @@ export default function Cars() {
 
     return (
         <div>
-            <h1>List of all my cars :</h1>
+            <div>List of all my cars :</div>
             <div className="m-2">
             {
                 cars.map(car => <Car key={car.id} brand={car.brand} model={car.model}/>)
